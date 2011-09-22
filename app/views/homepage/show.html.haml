@@ -1,0 +1,5 @@
+.menu
+  = link_to "Edit Articles", articles_path
+%h1 Articles
+- for article in @articles
+  = render '/article', :article => article

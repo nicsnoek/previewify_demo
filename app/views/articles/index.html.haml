@@ -1,0 +1,41 @@
+.articles_nav
+  = link_to "Home", root_path
+  = link_to "New", new_article_path
+
+%h1 My Articles
+%ul.articles
+  - for article in @articles
+    %li.article
+      .title
+        = link_to article.title, edit_article_path(article)
+      - if article.published?
+        .published
+          .version_number
+            Version
+            = "#{article.version_number},"
+          .last_updated
+            last updated at
+            = article.updated_at.to_formatted_s(:db)
+          .status
+            = " with unpublished changes" if article.has_unpublished_changes?
+          .take_down
+            = link_to "take down", article_path(article)+'?take_down=true'
+      - else
+        .unpublished
+          .version_number
+            Not published,
+          .last_updated
+            last updated at
+            = article.updated_at.to_formatted_s(:db)
+          .delete
+            = button_to "Delete", article_path(article), :method => :delete, :confirm => "Are your sure?", :title => 'Permanently delete article'
+      %ul
+        - article.versions.each do |article_version|
+          %li
+            .published_version_number
+              = link_to "Version #{article_version.version_number}", article_version_path(article_version, article_version.version_number)
+            .published_on
+              published on
+              = article_version.published_on.to_formatted_s(:db)
+
+

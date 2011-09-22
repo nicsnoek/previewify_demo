@@ -1,0 +1,55 @@
+h1 {
+  font-size: 18pt;
+  font-family: Arial;
+}
+
+.articles .article .published_version_number {
+  display: inline;
+}
+.articles .article .published_on {
+  display: inline;
+}
+
+.articles .article .title,
+.articles .article .version_number,
+.articles .article .last_updated {
+  display: inline;
+}
+
+.articles .article .take_down {
+}
+
+.new_article input,
+.new_atricle textarea,
+.edit_article input,
+.edit_article textarea {
+  width: 300px;
+}
+
+.review_header {
+    margin: 10px 0px 10px 0px;
+}
+
+.review {
+    border: 1px solid;
+    margin-bottom: 10px;
+}
+
+.new_article label,
+.edit_article label {
+  margin-top: 10px;
+  display: block;
+}
+
+#article_submit {
+  display: block;
+  margin-top: 10px;
+}
+
+.preview {
+    color: #8b0000;
+}
+
+.published.unpublished_changes {
+    color: #006400;
+}

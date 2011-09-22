@@ -1,0 +1,29 @@
+.articles_nav
+  = link_to "Home", root_path
+  = link_to "Articles", articles_path
+
+.review_header
+  - if @article.published? && !@article.has_unpublished_changes?
+    This is how your article currently appears
+  - else
+    -if params[:take_down]
+      This is how your article would appear if you published it
+    - else
+      This is how your article will appear
+
+.review
+  = render '/article', :article => @article
+
+= link_to "keep editing this article", edit_article_path(@article)
+
+- if (!@article.published? || @article.has_unpublished_changes?) && !params[:take_down]
+  = form_for :article, @article, :url => publish_article_path(@article), :html => {:method => :post} do |f|
+    - if !@article.published?
+      = f.submit 'Publish'
+    - else
+      = f.submit 'Publish changes'
+
+- if @article.published? && params[:take_down]
+  = form_for :article, @article, :url => take_down_article_path(@article), :html => {:method => :post} do |f|
+    = f.submit 'Take down'
+

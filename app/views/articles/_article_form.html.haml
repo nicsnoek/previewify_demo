@@ -1,0 +1,6 @@
+= form_for(@article) do |f|
+  = f.label :title
+  = f.text_field :title
+  = f.label :body_text
+  = f.text_area :body_text, :rows => 20, :cols => 40
+  = f.submit 'Save'

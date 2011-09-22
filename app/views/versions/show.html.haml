@@ -1,0 +1,14 @@
+Version
+= @article.version_number
+of this article was published on
+= @article.published_on.to_formatted_s(:rfc822)
+- if @draft_article.version_number == @article.version_number
+  and this is how the article currently appears on your website:
+- else
+  and appeared as follows:
+= render '/article', :article => @article
+
+.footer
+  - if @article.version_number != @draft_article.version_number || @draft_article.has_unpublished_changes?
+    = form_for :article, @article, :url => revert_article_version_path(@article, @article.version_number), :html => {:method => :post} do |f|
+      = f.submit 'Revert your draft to this version'
